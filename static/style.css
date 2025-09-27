@@ -1,0 +1,126 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.default-padding {
+    padding-top: 150px;  
+}
+
+.with-results {
+    padding-top: 15px
+}
+
+#input-type {
+    margin: 25px;
+    padding: 15px;
+}
+
+.input-button, .upload-button  {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 25px;
+    font-size: 1.5rem;
+    font-family: Arial;
+    border: none;
+    border-radius: 8px;          
+    cursor: pointer;            
+    transition: background 0.3s; 
+}
+
+.custom-file-upload {
+    display: inline-block;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 25px;
+    font-size: 1.5rem;
+    font-family: Arial;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Hide the actual file input */
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+
+.input-button:hover {
+    background-color: #45a049;  
+}
+
+#input-type fieldset {
+    display: flex;
+    justify-content: center; 
+    gap: 4.5rem;               
+    border: none;            
+}
+
+.result-image {
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
+    /* display: inline-block; */
+}
+
+#upload-image-form, #upload-video-form {
+    display: flex;
+    justify-content: center;
+    gap: 2.25rem;
+}
+
+#image-result-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* #original-image, #predicted-image {
+    max-width: 25%;
+    height: auto;
+    border-radius: 10px;
+} */
+
+.image-block {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.image-block h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+#original-image, #predicted-image {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.result-video {
+    max-width: 900px;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    
+}
+
+#video-result-container {
+    margin-top: 60px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}

@@ -1,0 +1,6 @@
+__pycache__/
+venv/
+trash/
+inputs/
+static/uploads/
+static/predictions/

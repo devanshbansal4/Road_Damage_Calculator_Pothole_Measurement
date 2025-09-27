@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+    <title>Road Damage Assessment System</title>
+</head>
+<body>
+    <div id="container" class="{% if original_image_url and predicted_image_url %}with-results{% else %}default-padding{% endif %}">
+        <h1 id="heading">Road Damage Assessment System</h1>
+        <div id="input-type">
+            <h2>Select the type of input</h2>
+            <fieldset>
+                <Label for="video-input">
+                    <input class="input-button" type="button" id="video-input" value="Video" onclick="toggleInputType('video')">
+                </Label>
+                <Label for="image-input">
+                    <input class="input-button" type="button" id="image-input" value="Image" onclick="toggleInputType('image')">
+                </Label>
+            </fieldset>
+        </div>
+        
+        <div id="image" style="display: none;">
+            <!-- Image upload and result sections -->
+            <div id="upload-image">
+                <h2>Upload the Image</h2>
+                <form id="upload-image-form" method="post" action="{{ url_for('upload_image') }}" enctype="multipart/form-data">
+                    <label class="custom-file-upload">
+                        <input type="file" name="image" accept="image/*" required>
+                        Choose Image
+                    </label>
+                    <label for="upload-image-button">
+                        <input class="upload-button" type="submit" value="Upload Image" />
+                    </label>
+                </form>
+            </div>
+            
+            <div id="image-result-container">
+                {% if original_image_url and predicted_image_url %}
+                    <div class="image-block">
+                        <img id="original-image" src="{{ original_image_url }}" alt="Original Image" class="result-image" />
+                        <h3>Original Image</h3>
+                    </div>
+                    <div class="image-block">
+                        <img id="predicted-image" src="{{ predicted_image_url }}" alt="Predicted Image" class="result-image" />
+                        <h3>Predicted Image</h3>
+                    </div>
+                {% elif error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="video" style="display: none;">
+            <!-- Video upload and result sections -->
+            <div id="upload-video">
+                <h2>Upload the Video</h2>
+                <form id="upload-video-form" method="post" action="{{ url_for('upload_video') }}" enctype="multipart/form-data">
+                    <label class="custom-file-upload">
+                        <input type="file" name="video" accept="video/*" required>
+                        Choose Video
+                    </label>
+                    <label for="upload-video-button">
+                        <input class="upload-button" type="submit" value="Upload Video" />
+                    </label>
+                </form>
+            </div>
+
+            <div id="video-result-container">
+                {% if predicted_video_url %}
+                <h3>Predicted Video</h3>
+                <video id="video-player" src="{{ predicted_video_url }}" alt="Predicted Video" controls autoplay muted class="result-video">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleInputType(inputType) {
+            document.getElementById("image").style.display = "none";
+            document.getElementById("video").style.display = "none";
+    
+            if (inputType === "image") {
+                document.getElementById("image").style.display = "block";
+            } else if (inputType === "video") {
+                document.getElementById("video").style.display = "block";
+            }
+        }
+    
+        // Automatically show the correct section if input_type is set from Flask
+        window.onload = function() {
+            const inputType = "{{ input_type | default('') }}";
+            if (inputType) {
+                toggleInputType(inputType);
+            }
+        };
+    </script>
+    
+</body>
+</html>
